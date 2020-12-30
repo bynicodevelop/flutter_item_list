@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_item_list/components/Label.dart';
 import 'package:flutter_item_list/components/SubLabel.dart';
 import 'package:flutter_profile_avatar/flutter_profile_avatar.dart';
-import 'package:time_formatter/time_formatter.dart';
 
-class Item extends StatelessWidget {
+class MessageItem extends StatelessWidget {
   final Function(dynamic data) onTap;
 
   final String uid;
@@ -13,7 +12,7 @@ class Item extends StatelessWidget {
   final String avatarURL;
   final int sendAt;
 
-  const Item({
+  const MessageItem({
     Key key,
     this.onTap,
     this.uid,
@@ -32,13 +31,16 @@ class Item extends StatelessWidget {
           bottom: 10.0,
         ),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ProfileAvatar(
-              username: label,
-              avatarURL: avatarURL,
-            ),
-            SizedBox(
-              width: 15.0,
+            Padding(
+              padding: const EdgeInsets.only(
+                right: 20.0,
+              ),
+              child: ProfileAvatar(
+                username: label,
+                avatarURL: avatarURL,
+              ),
             ),
             Expanded(
               child: Column(
@@ -48,11 +50,17 @@ class Item extends StatelessWidget {
                     label: label,
                     sendAt: sendAt,
                   ),
-                  SizedBox(
-                    height: 3.0,
-                  ),
                   SubLabel(
                     label: subLabel,
+                    maxLines: 2,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 15.0,
+                    ),
+                    child: Divider(
+                      color: Colors.grey[800],
+                    ),
                   ),
                 ],
               ),
